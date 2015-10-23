@@ -5,10 +5,10 @@
     <div class="row">
 <%= bootstrap_flash %>
         <div class="col-sm-11">
-            <h1 class="page-header">Products Dashboard</h1>
+            <h1 class="page-header">Sales Dashboard!</h1>
         </div>
         <div class="col-sm-1">
-        	<%= link_to "Sales", sales_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
+        	<%= link_to "Products", product_index_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
         </div>	
         <div class="col-sm-1">
         	<%= button_to "Log Out", "/sign_out" %>
@@ -23,7 +23,7 @@
                     <div class="row"> 
                         <div class="col-xs-12 text-right">
                             <div id="numberReceivers" class="huge"></div>
-                            <div>Amount of Phone We Buy <%= @products.length %></div>
+                            <div>All Orders Created <%= @sales.length %></div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="row"> 
                         <div class="col-xs-12 text-right">
                             <div id="numberReceivers" class="huge"></div>
-                            <div>All Orders </div>
+                            <div>All Orders <%= @sales.length %></div>
                         </div>
                     </div>
                 </div>
@@ -117,35 +117,18 @@
                     <div class="pull-right">
                         <div class="dropdown">
                             <div class="btn-group">
-	                            <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
-	                                Add Phone
-	                                <span class="glyphicon glyphicon-plus"></span>
-	                            </button>
-                            	<!-- modal -->
-                            	<!-- Button trigger modal -->
-                            	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            	  Launch demo modal
-                            	</button>
-
-                            	<!-- Modal -->
-                            	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            	  <div class="modal-dialog" role="document">
-                            	    <div class="modal-content">
-                            	      <div class="modal-header">
-                            	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            	      </div>
-                            	      <div class="modal-body">
-                            	        ...
-                            	      </div>
-                            	      <div class="modal-footer">
-                            	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            	        <button type="button" class="btn btn-primary">Save changes</button>
-                            	      </div>
-                            	    </div>
-                            	  </div>
-                            	</div>
-
+                                
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Shipped</a>
+                                    </li>
+                                    <li><a href="#">Needs to Ship</a>
+                                    </li>
+                                    <li><a href="#">Something else here</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -160,29 +143,59 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Product#</th>
-                                            <th>Model</th>
-                                            <th>carrier</th>
-                                            <th>capacity</th>
-                                            <th>condition</th>
+                                            <th>Order#</th>
+                                            <th>Email</th>
+                                            <th>Order Date</th>
                                             <th>Price</th>
+                                            <th>Name</th>
+                                            <th>Street</th>
+                                            <th>City</th>
                                             <th>State</th>
-                                            <th>Edit</th>
-                                            <th>Deactivate</th>
+                                            <th>Country</th>
+                                            <th>Zip</th>
+                                            <th>Shipped</th>
+                                            <th>Arrived</th>
+                                            <th>Paid</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% @products.each do |product| %>
+                                        <% @sales.each do |sale| %>
                                         <tr>     
-                                            <td><%= product.id %></td>
                                             
-                                            <td><%= product.model %></td>
-                                            <td><%= product.carrier %></td>
-                                            <td><%= product.capacity %></td>
-                                            <td><%= product.condition %></td>
-                                            <td><%= product.price %></td>
-                                 
+                                           
+                                            <td><%= sale.id %></td>
+                                            <td><%= sale.email %></td>
+                                            <td><%= sale.created_at%></td>
+                                            <td><%= sale.product_id %></td>
+                                            <td><%= sale.first_name %> <%= sale.last_name %></td>
+                                            <td><%= sale.address %></td>
+                                            <td><%= sale.city %></td>
+                                            <td><%= sale.state %></td>
+                                            <td><%= sale.country %></td>
+                                            <td><%= sale.zipcode %></td>
+                                            <td> <%= form_tag update_sale_path(sale), method: :patch do %>
+                                              <%= hidden_field_tag 'sale_id', sale.id %>
+                                                <% if sale.phone_shipped == nil %>
+                                                  <%= submit_tag "Shipped", class: "shipped" %>
+                                                <%end%>
+                                              <%end%>                                       
+                                             <%= sale.phone_shipped %></td>
+                                             <td> <%= form_tag update_sale_path(sale), method: :patch do %>
+                                              <%= hidden_field_tag 'sale_id', sale.id %>
+                                                <% if sale.phone_arrived == nil %>
+                                                  <%= submit_tag "Arrived", class: "shipped" %>
+                                                <%end%>
+                                              <%end%>                                       
+                                             <%= sale.phone_arrived %></td>
+                                             <td> <%= form_tag update_sale_path(sale), method: :patch do %>
+                                              <%= hidden_field_tag 'sale_id', sale.id %>
+                                                <% if sale.sale_paid == nil %>
+                                                  <%= submit_tag "Paid", class: "shipped" %>
+                                                <%end%>
+                                              <%end%>                                       
+                                             <%= sale.sale_paid %></td>
+                                             <td> <%= link_to "Delete", delete_sale_path(sale), method: :delete %><br></td>
                                             
                                         </tr>
                                         <%end%>

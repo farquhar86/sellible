@@ -1,5 +1,6 @@
-class SaleController < ApplicationController
+class SalesController < ApplicationController
   def index
+    @sales = Sale.all
   end
   def new
    	@sale = Sale.new
@@ -14,7 +15,17 @@ class SaleController < ApplicationController
   end
   def show
    	@sale = Sale.find(params[:id])
-  end  
+  end 
+  def update
+    sale = Sale.find(params[:id])
+
+    sale.update_attribute(:phone_shipped, DateTime.now)
+    redirect_to "/sales"
+  end
+  def destroy
+    Sale.delete(params[:id])
+    redirect_to "/sales", flash: { success: "Record Deleted" }
+  end 
   private
 
   def sale_params  
