@@ -1,0 +1,57 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+	your price is: <%= number_to_currency(@phone.first.price) %>
+	<%= @phone.first.id %>
+</div>
+	<%= form_for :sale, url: sale_create_path do |f| %>
+		<div class="col-sm-12">
+          <div class="col-sm-12 payments">
+            <div class="row">
+                <%= f.text_field :first_name, class: "form-control", placeholder: 'First Name', autofocus: true, required: true %>
+            </div>
+          <div class="row">
+            
+                <%= f.text_field :last_name, class: "form-control", placeholder: 'Last Name', autofocus: true, required: true %>
+          </div>
+          <div class="row">
+            
+                <%= f.email_field :email, class: "form-control", placeholder: 'Email', autofocus: true, required: true %>
+            
+          </div>
+          <div class="row">
+            
+              <%= f.telephone_field :phone, type:"number", class: "form-control", placeholder: 'Phone', autofocus: true %>
+           
+          </div>
+          <div class="row">
+            
+              <%= f.text_field :address, class: "form-control", placeholder: 'Address', autofocus: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+              <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true %>
+            </div>
+            <div class="col-sm-7">
+              <%= f.text_field :state, class: "form-control", placeholder: 'State/Province', autofocus: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+              <%= f.text_field :zipcode, type:"number", class: "form-control", placeholder: 'Zip Code', autofocus: true %>
+            </div>
+            <div class="col-sm-7">
+              <%= f.text_field :country, class: "form-control", placeholder: 'Country', autofocus: true %>
+            </div>
+          </div>
+
+          <%= f.hidden_field :product_id, :value => @phone.first.id %>
+        <%=f.check_box :terms_of_service %>
+
+        <%= f.submit "Sell my Phone", class: "btn btn-primary", id: "book-btn", type: "submit" %> 
+
+
+      <% end %>

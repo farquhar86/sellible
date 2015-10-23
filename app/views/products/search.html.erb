@@ -1,0 +1,65 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!-- <img src="http://static.thetechjournal.net/wp-content/uploads/images/1110/1318091364-iphone-4s-now-available-for-preorder-1.png"> -->
+	This is where they can select there phone model
+	
+<%= form_for :sale_test, url: sale_new_path, method: "POST" do |f| %>	
+
+		<select name="product.model">
+			<% @models.each do |model| %>
+			  <option value="<%= model.model %>"><%= model.model %></option>
+			<% end %>
+		</select>
+	<br>
+	<br>
+		Select provider
+		<select name="product.carrier">
+		  <% @carriers.each do |carrier| %>
+			  <option value="<%= carrier.carrier %>"><%= carrier.carrier %></option>
+		  <% end %>
+		</select>
+	<br>
+	<br>
+		select capacity 
+		<select name="product.capacity">
+		  <% @capacities.each do |capacity| %>
+			  <option value="<%= capacity.capacity %>"><%= capacity.capacity %></option>
+		  <% end %>
+		</select>
+	<br>
+	<br>
+		select condition 
+		<select name="product.condition">
+		  <% @conditions.each do |condition| %>
+			  <option value="<%= condition.condition %>"><%= condition.condition %></option>
+		  <% end %>
+		</select>
+<br>
+<br>
+<%= f.submit %>
+<% end %>
+	
+
+
+
+
+<!-- 
+	<div class="row">	
+
+		 <div class="col-md-2">
+		 	iPhone 6
+		 </div>
+		 <div class="col-md-2">iPhone 5</div>
+		 <div class="col-md-2">iPhone 4</div>
+		 <div class="col-md-2">iPhone 3</div>
+		 <div class="col-md-2">iPhone 2</div>
+	</div>	 -->
+</div>
