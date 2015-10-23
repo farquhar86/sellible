@@ -18,8 +18,14 @@ class SalesController < ApplicationController
   end 
   def update
     sale = Sale.find(params[:id])
-
-    sale.update_attribute(:phone_shipped, DateTime.now)
+    if params[:shipped]
+      sale.update_attribute(:phone_shipped, DateTime.now)
+    elsif params[:arrived]
+      sale.update_attribute(:phone_arrived, DateTime.now)
+    elsif params[:paid]
+      sale.update_attribute(:sale_paid, DateTime.now)
+    end  
+      
     redirect_to "/sales"
   end
   def destroy

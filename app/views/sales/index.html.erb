@@ -174,27 +174,28 @@
                                             <td><%= sale.state %></td>
                                             <td><%= sale.country %></td>
                                             <td><%= sale.zipcode %></td>
-                                            <td> <%= form_tag update_sale_path(sale), method: :patch do %>
-                                              <%= hidden_field_tag 'sale_id', sale.id %>
-                                                <% if sale.phone_shipped == nil %>
-                                                  <%= submit_tag "Shipped", class: "shipped" %>
+                                            <td> 
+                                                <% if sale.phone_shipped %>
+                                                    <%= sale.phone_shipped %>
+                                                <% else %>    
+                                                    <%= button_to "Shipped", update_sale_path(sale, :shipped => true), :method => "post", class: "shipped"%>
                                                 <%end%>
-                                              <%end%>                                       
-                                             <%= sale.phone_shipped %></td>
-                                             <td> <%= form_tag update_sale_path(sale), method: :patch do %>
-                                              <%= hidden_field_tag 'sale_id', sale.id %>
-                                                <% if sale.phone_arrived == nil %>
-                                                  <%= submit_tag "Arrived", class: "shipped" %>
+                                                                                    
+                                             </td>
+                                             <td>
+                                                 <% if sale.phone_arrived %>
+                                                    <%= sale.phone_arrived %>
+                                                 <% else %>   
+                                                    <%= button_to "Arrived", update_sale_path(sale, :arrived => true), :method => "post", class: "shipped"%>
+                                                 <%end%>
+                                                                              
+
+                                             <td> 
+                                                <% if sale.sale_paid %>
+                                                   <%= sale.sale_paid %>
+                                                <% else %>  
+                                                    <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "shipped"%></td>
                                                 <%end%>
-                                              <%end%>                                       
-                                             <%= sale.phone_arrived %></td>
-                                             <td> <%= form_tag update_sale_path(sale), method: :patch do %>
-                                              <%= hidden_field_tag 'sale_id', sale.id %>
-                                                <% if sale.sale_paid == nil %>
-                                                  <%= submit_tag "Paid", class: "shipped" %>
-                                                <%end%>
-                                              <%end%>                                       
-                                             <%= sale.sale_paid %></td>
                                              <td> <%= link_to "Delete", delete_sale_path(sale), method: :delete %><br></td>
                                             
                                         </tr>

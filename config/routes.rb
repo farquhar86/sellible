@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/sales/:id', to: "sales#show", as: "sale"
   post '/sale/new', to: 'sales#new', as: 'sale_test'
   post '/sale/create', to: 'sales#create'
-  patch "/sales/:id", to: "sales#update", as: "update_sale" # submit my edits
+  post "/sales/:id", to: "sales#update", as: "update_sale" # submit my edits
   delete "/sales/:id", to: "sales#destroy", as: "delete_sale"
   
 
