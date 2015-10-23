@@ -4,10 +4,10 @@
 <p>Sign In Admin</p>    
 <%= form_for @superuser, url: "/sessions", method: "post", :html => {:class => "loginForm"} do |f| %>
     <div>
-        <%= f.text_field :email, placeholder: "Email" %>
+        <%= f.text_field :email, placeholder: "Email", value: "bar@bar.com"%>
     </div>
     <div>
-        <%= f.password_field :password, placeholder: "Password" %>
+        <%= f.password_field :password, placeholder: "Password", value: "barbar" %>
     </div>
     
     <%= f.submit "Sign In"%>

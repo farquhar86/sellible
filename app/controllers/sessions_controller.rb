@@ -6,12 +6,12 @@ class SessionsController < ApplicationController
 
   def create
   	@superuser = Superuser.confirm(superuser_params)
-
+    
   	if @superuser
   		login(@superuser)
-  		redirect_to "/sales#{@superuser.id}" 
+  		redirect_to "/sales" 
   	else
-  		redirect_to "/login"
+  		redirect_to root_path
   	end
   end
 

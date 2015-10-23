@@ -1,12 +1,17 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
+    @product = Product.new
   end
 
   def new
   end
 
   def create
+    product_params = params.require(:products).permit(:model, :carrier, :capacity)
+    @product = Product.new product_params
+    @product.save
+    redirect_to products_path , flash: { success: "New Product Added!" }
   end
   def search
   	@products = Product.all

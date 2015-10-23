@@ -1,12 +1,26 @@
 <br>
 <br>
 <br>
+<script>$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+})
+</script>
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+
 <div class="container">
     <div class="row">
 <%= bootstrap_flash %>
         <div class="col-sm-11">
             <h1 class="page-header">Products Dashboard</h1>
         </div>
+
         <div class="col-sm-1">
         	<%= link_to "Sales", sales_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
         </div>	
@@ -121,22 +135,25 @@
 	                                Add Phone
 	                                <span class="glyphicon glyphicon-plus"></span>
 	                            </button>
-                            	<!-- modal -->
-                            	<!-- Button trigger modal -->
-                            	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            	  Launch demo modal
-                            	</button>
-
                             	<!-- Modal -->
                             	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             	  <div class="modal-dialog" role="document">
                             	    <div class="modal-content">
                             	      <div class="modal-header">
                             	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            	        <h4 class="modal-title" id="myModalLabel">Add New Phone</h4>
                             	      </div>
                             	      <div class="modal-body">
-                            	        ...
+                            	       	<%= form_for @product do |form| %>
+                            	       	  
+                            	       	 	<%= form.text_field :model, :required => true, placeholder: "Title", :maxlength => 200, class: "form-control title_input_field" %><br>
+
+                            	       		<%= select(:carrier, :city_id, [['ATT', "ATT"], ['Verizon', "Verizon"], ["T-Mobile", "T-Mobile"], ['Sprint', "Sprint"], ["Other Carrier", "Other Carrier"]], {}, {:class => 'dropdown_menu'}) %><br>
+
+                            	       	    <%= form.text_area :capacity, :required => true, placeholder: "Any cool destinations on this planet?", size: "100x10", class: "input_field2" %> <br>
+                            	       	    <br>
+                            	         		<%= form.submit "Create!", :class => 'submit_button' %>
+                            	       	<% end %> 
                             	      </div>
                             	      <div class="modal-footer">
                             	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -145,7 +162,6 @@
                             	    </div>
                             	  </div>
                             	</div>
-
                             </div>
                         </div>
                     </div>
