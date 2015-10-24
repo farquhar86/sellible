@@ -8,8 +8,10 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product_params = params.require(:products).permit(:model, :carrier, :capacity)
+    product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price)
+
     @product = Product.new product_params
+    byebug
     @product.save
     redirect_to products_path , flash: { success: "New Product Added!" }
   end

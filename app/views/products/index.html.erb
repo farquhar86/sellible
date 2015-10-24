@@ -145,20 +145,24 @@
                             	      </div>
                             	      <div class="modal-body">
                             	       	<%= form_for @product do |form| %>
-                            	       	  
-                            	       	 	<%= form.text_field :model, :required => true, placeholder: "Title", :maxlength => 200, class: "form-control title_input_field" %><br>
-
-                            	       		<%= select(:carrier, :city_id, [['ATT', "ATT"], ['Verizon', "Verizon"], ["T-Mobile", "T-Mobile"], ['Sprint', "Sprint"], ["Other Carrier", "Other Carrier"]], {}, {:class => 'dropdown_menu'}) %><br>
-
-                            	       	    <%= form.text_area :capacity, :required => true, placeholder: "Any cool destinations on this planet?", size: "100x10", class: "input_field2" %> <br>
+                            	       	    Model
+                            	       	 	<%= form.text_field :model, :required => true, placeholder: "Model", :maxlength => 200, class: "form-control title_input_field" %><br>
+                                            Carrier
+                            	       		<%= select(:carrier, :carrier, [['AT&T', "ATT"], ['Verizon', "Verizon"], ["T-Mobile", "T-Mobile"], ['Sprint', "Sprint"], ["Other Carrier", "Other Carrier"]], {}, {:class => 'dropdown_menu'}) %><br>
+                                            Capacity
+                            	       	    <%= select(:capacity, :capacity, [['8', 8], ['16', 16], ["32", 32], ['64', 64], ["128", 128]], {}, {:class => 'dropdown_menu'}) %> <br>
+                                            Condition
+                                            <%= select(:condition, :condition, [['Busted', 'Busted'], ['Fair', 'Fair'], ["Pristine", 'Pristine']], {}, {:class => 'dropdown_menu'}) %>
                             	       	    <br>
-                            	         		<%= form.submit "Create!", :class => 'submit_button' %>
-                            	       	<% end %> 
-                            	      </div>
-                            	      <div class="modal-footer">
-                            	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            	        <button type="button" class="btn btn-primary">Save changes</button>
-                            	      </div>
+                                            Price
+                                            <%= form.text_field :price, :required => true, placeholder: "Price", :maxlength => 200, class: "form-control title_input_field" %><br>
+                            	         	
+                                        </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <%= form.submit "Create", :class => 'submit_button btn btn-default' %>
+                    	       	       <% end %> 
+                    	              </div>
                             	    </div>
                             	  </div>
                             	</div>
