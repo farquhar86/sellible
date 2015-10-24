@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/product/price', to: 'products#find', as: 'product_find'
   post '/product/price', to: 'products#find'
   post "/products", to: "products#create"
+  delete "/products/:id", to: "products#destroy", as: "delete_product"
 
   get "/login", to: "sessions#new"
   post "/sessions", to: "sessions#create"

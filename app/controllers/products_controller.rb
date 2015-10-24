@@ -15,6 +15,9 @@ class ProductsController < ApplicationController
     @product.save
     redirect_to products_path , flash: { success: "New Product Added!" }
   end
+  def edit
+    @product = Product.find(params[:id])
+  end
   def search
   	@products = Product.all
   	@models = @products.select(:model).distinct 
@@ -30,7 +33,11 @@ class ProductsController < ApplicationController
  	
   	price = @phone.first.price
   	redirect_to "/sale/new"
-  end	
+  end
+  def destroy
+    Product.delete(params[:id])
+    redirect_to "/product/index", flash: { success: "Phone Deleted" }
+  end 	
 end
 
 
