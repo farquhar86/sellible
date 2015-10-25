@@ -7,8 +7,61 @@
   <br>
 	
 </div>
-	<%= form_for :sale, url: sale_create_path do |f| %>
-		<div class="col-sm-12">
+	
+		
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Email
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <%= form_for :sale, url: sale_create_path do |f| %>
+          <div class="row">
+            <%= f.email_field :email, class: "form-control", placeholder: 'Email', autofocus: true, required: true %>
+          </div>
+        
+        <button class="collapsed" role="button" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
+          
+     
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        
+          Payment Information
+       
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        Is your paypal email the same as your email above?
+
+       <input placeholder="paypal email"></input>
+       <button class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Next</button> 
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+     
+          Details
+       
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+            
+
+            <div class="col-sm-12">
           <div class="col-sm-12 payments">
             <div class="row">
                 <%= f.text_field :first_name, class: "form-control", placeholder: 'First Name', autofocus: true, required: true %>
@@ -48,84 +101,8 @@
           <%= f.hidden_field :product_id, :value => @phone.first.id %>
         <%=f.check_box :terms_of_service %>
 
-        <%= f.submit "Sell my Phone", class: "btn btn-primary", id: "book-btn", type: "submit" %> 
-
-
-      <% end %>
-
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Email
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        <%= form_for :sale, url: sale_create_path do |f| %>
-          <div class="row">
-            <%= f.email_field :email, class: "form-control", placeholder: 'Email', autofocus: true, required: true %>
-          </div>
-        
-        <button class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
-          
-          <%= f.submit "Sell my Phone", class: "btn btn-primary collapsed", id: "book-btn", type: "submit", href: "#collapseTwo" %> 
+        <%= f.submit "Sell my Phone", class: "btn btn-primary", id: "book-btn", type: "submit" %>  
         <% end %>
-
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        
-          Payment Information
-       
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-
-<div class="row">
-  <div class="col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingfour">
-            <h4 class="panel-title">
-           
-                Would you have pay pal?
-             
-            </h4>
-          </div>
-          <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
-            <div class="panel-body">
-             Is your paypal email the same as your email above?
-
-              <input placeholder="paypal email"></input>
-              <button class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Next</button> 
-            </div>
-          </div>
-        </div>
-      </div>  
-        <div class="col-sm-6">
-            Would you like to be mailed a check? <input type="checkbox">
-          </div>    
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-     
-          Details
-       
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-       info
       </div>
     </div>
   </div>

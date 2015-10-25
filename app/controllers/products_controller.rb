@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
   def find
   	@sale = Sale.new
   	@phone = Product.where(condition: params["product.condition"], carrier: params["product.carrier"], model: params["product.model"], capacity: params["product.capacity"])
- 	
+ 	  byebug
   	price = @phone.first.price
   	redirect_to "/sale/new"
   end

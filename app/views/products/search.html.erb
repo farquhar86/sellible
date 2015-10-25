@@ -11,7 +11,7 @@
 	<!-- <img src="http://static.thetechjournal.net/wp-content/uploads/images/1110/1318091364-iphone-4s-now-available-for-preorder-1.png"> -->
 	This is where they can select there phone model
 	
-<%= form_for :sale_test, url: sale_new_path, method: "POST" do |f| %>	
+<%= form_for :sale_find, url: sale_new_path, method: "POST" do |f| %>	
 
 		<select name="product.model">
 			<% @models.each do |model| %>
