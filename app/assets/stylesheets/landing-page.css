@@ -28,14 +28,18 @@ h6 {
 .lead {
     font-size: 18px;
     font-weight: 400;
+    color: #6C7A89;
 }
 
+.banner {    
+    background-color: #3E3F40;
+    background-size: cover;
+}
 .intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    color: white;
+    
     background-size: cover;
 }
 
@@ -47,18 +51,25 @@ h6 {
 
 .intro-message > h1 {
     margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    /*text-shadow: 2px 2px 3px rgba(0,0,0,0.6);*/
     font-size: 5em;
 }
 
 .intro-divider {
     width: 400px;
-    border-top: 1px solid #f8f8f8;
+    border-top: 1px solid #BFBFBF;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    /*text-shadow: 2px 2px 3px rgba(0,0,0,0.6);*/
+}
+.photo {
+    width: 175px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 
 @media(max-width:767px) {
@@ -105,6 +116,7 @@ h6 {
 
 .section-heading {
     margin-bottom: 30px;
+    color: black;
 }
 
 .section-heading-spacer {
@@ -113,12 +125,12 @@ h6 {
     border-top: 3px solid #e7e7e7;
 }
 
-.banner {
+/*.banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background: url(http://www.imore.com/sites/imore.com/files/styles/w1600h900crop/public/field/image/2013/08/iphone_5_apple_store_hero_4x3.jpg?itok=yeV6TM3j) no-repeat center center;
     background-size: cover;
-}
+}*/
 
 .banner h2 {
     margin: 0;

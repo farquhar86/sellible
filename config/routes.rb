@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
 
   root to: 'welcome#index'
+  
   get '/sales', to: "sales#index"
   get '/sale/new', to: "sales#new"
   get '/sales/:id', to: "sales#show", as: "sale"
