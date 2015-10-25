@@ -3,29 +3,38 @@
 <br>
 <br>
 <div class="container">
-	<h1>your price is: <%= number_to_currency(@phone.first.price) %></h1>
+	<h1 class="center">Your Cash Offer: <%= number_to_currency(@phone.first.price) %></h1>
   <br>
 	
-</div>
+
 	
-		
+<div class="row">
+<div class="col-sm-4">
+  <div class="center">
+    Apple <%= @phone.first.model %> <%= @phone.first.capacity %>GB<br>
+    (<%= @phone.first.carrier %>)
+  </div>
+  <img class="img-responsive photo" align="middle" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/IPhone_5.png" alt="">
+</div> 
+<div class="col-sm-8"> 
+<h3>Save your price and get paid</h3>		
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Email
+          1. Please Enter your Email
         </a>
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
         <%= form_for :sale, url: sale_create_path do |f| %>
-          <div class="row">
+         
             <%= f.email_field :email, class: "form-control", placeholder: 'Email', autofocus: true, required: true %>
-          </div>
+          
         
-        <button class="collapsed" role="button" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
+        <button class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
           
      
 
@@ -35,17 +44,19 @@
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
-        
-          Payment Information
-       
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> 
+          2. Payment Information
+       </a>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        Is your paypal email the same as your email above?
+        Please enter your paypal email if different than above?<br>
 
-       <input placeholder="paypal email"></input>
+       <%= f.email_field :paypal_email, class: "form-control", placeholder: 'PayPal Email', autofocus: true, required: true %>
+       If you would prefer to be mailed a check check here: <%=f.check_box :terms_of_service %><br>
        <button class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Next</button> 
+      
       </div>
     </div>
   </div>
@@ -53,7 +64,7 @@
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
      
-          Details
+         3. Details
        
       </h4>
     </div>
@@ -86,7 +97,7 @@
               <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true %>
             </div>
             <div class="col-sm-7">
-              <%= f.text_field :state, class: "form-control", placeholder: 'State/Province', autofocus: true %>
+              <%= f.text_field :state, class: "form-control", placeholder: 'State', autofocus: true %>
             </div>
           </div>
           <div class="row">
@@ -106,4 +117,7 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
 </div>
