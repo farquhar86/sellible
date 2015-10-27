@@ -6,7 +6,7 @@ layout 'purchase_mailer'
  def purchase_receipt purchase
  @purchase = purchase
 
- mail to: purchase.email, subject: "Claim your!"
+ mail to: purchase.email, subject: "Ship us your phone"
 
   end
 
