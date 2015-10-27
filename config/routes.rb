@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/sale/new', to: 'sales#new', as: 'sale_new'
   post '/sale/create', to: 'sales#create'
   post "/sales/:id", to: "sales#update", as: "update_sale" # submit my edits
+  patch "/sales", to: "sales#complete", as: "complete_sale"
   delete "/sales/:id", to: "sales#destroy", as: "delete_sale"
   
 

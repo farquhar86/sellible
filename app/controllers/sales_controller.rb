@@ -13,12 +13,20 @@ class SalesController < ApplicationController
   def newId
     @sale = Sale.new
     id = params[:id]
+    @sale_id = Sale.last.id + 1 ##this + 1 is here because it was giving me the 
     @phone = Product.find(id)
   end
 
   def create
-  	@sale = Sale.new sale_params
+    # here be where email is submitted
+    @sale = Sale.new email_params
     @sale.save
+    
+    render json: {"message" => "Success"}, status: 200
+  end
+  def complete
+    @sale = Sale.find(params[:sale][:id])
+    @sale.update(sale_params)
     redirect_to @sale
   end
   def show
@@ -43,7 +51,10 @@ class SalesController < ApplicationController
   end 
   private
 
-  def sale_params  
-      params.require(:sale).permit(:first_name, :last_name, :address, :city, :state, :country, :zipcode, :phone, :email, :product_id)
+  def email_params  
+      params.require(:sale).permit(:email)
+  end
+   def sale_params  
+      params.require(:sale).permit(:first_name, :last_name, :address, :city, :state, :country, :zipcode, :phone, :product_id, :id)
   end
 end

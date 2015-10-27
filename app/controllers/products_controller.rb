@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
          redirect_to "/products", flash: { success: "Your Change Has Been Saved" }
       else
-        redirect_to "/products"   ### potentially change render page???? ###
+        redirect_to "/products"  
       end
   end
   def search
