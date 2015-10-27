@@ -111,7 +111,7 @@
 
           <%= f.hidden_field :product_id, :value => @phone.id %><br>
           <!-- Button trigger modal -->
-        <%=f.check_box :terms_of_service %> <a type="button" class="" data-toggle="modal" data-target="#myModal">Agree with Terms of Service</a><br> 
+        <%=f.check_box :terms_of_service, required: true  %> <a type="button" class="" data-toggle="modal" data-target="#myModal">Agree with Terms of Service</a><br> 
 
         <br><%= f.submit "Sell my Phone", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", id: "book-btn", type: "submit" %>  
         <% end %>
