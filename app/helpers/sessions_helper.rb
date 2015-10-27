@@ -10,7 +10,7 @@ module SessionsHelper
 
     def logged_in? 
         if current_superuser == nil
-            redirect_to "/sign_in"
+            
         end
     end
 
@@ -37,7 +37,7 @@ module SessionsHelper
     def if_right_superuser
       @current_superuser = exactsuperuser
       if @current_superuser = !@current_superuser
-        redirect_to "/sign_in"
+        redirect_to "/login"
       end  
     end
 end

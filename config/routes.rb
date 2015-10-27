@@ -4,19 +4,20 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   get '/sales', to: "sales#index"
-  get '/sale/new', to: "sales#new"
+  get '/sale/new/:id', to: "sales#newId", as: 'new_sale_id'
   get '/sales/:id', to: "sales#show", as: "sale"
-  post '/sale/new', to: 'sales#new', as: 'sale_find'
+  post '/sale/new', to: 'sales#new', as: 'sale_new'
   post '/sale/create', to: 'sales#create'
   post "/sales/:id", to: "sales#update", as: "update_sale" # submit my edits
   delete "/sales/:id", to: "sales#destroy", as: "delete_sale"
   
 
   get '/product/search', to: 'products#search'
-  get '/product/index', to: 'products#index'
+  get '/products', to: 'products#index', as: "products"
   get '/product/price', to: 'products#find', as: 'product_find'
   post '/product/price', to: 'products#find'
   post "/products", to: "products#create"
+  patch "/products", to: "products#update", as: "update_product"
   delete "/products/:id", to: "products#destroy", as: "delete_product"
 
   get "/login", to: "sessions#new"

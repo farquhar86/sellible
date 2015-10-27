@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row">
-<%= bootstrap_flash %>
+        <%= bootstrap_flash %>
         <div class="col-sm-11">
             <h1 class="page-header">Products Dashboard</h1>
         </div>
@@ -124,7 +124,14 @@
             <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i>Orders Places</i>
+                    <i>Products Table</i> 
+
+                    <% form_tag products_path, :method => 'get' do %>
+                      <p>
+                        <%= text_field_tag :search, params[:search] %>
+                        <%= submit_tag "Search", :name => nil %>
+                      </p>
+                    <% end %>
                     <div class="pull-right">
                         <div class="dropdown">
                             <div class="btn-group">
@@ -177,19 +184,19 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Product#</th>
-                                            <th>Model</th>
-                                            <th>carrier</th>
-                                            <th>capacity</th>
-                                            <th>condition</th>
-                                            <th>Price</th>
+                                            <th><%= link_to "ID", :sort => "id" %></th>
+                                            <th><%= link_to "Model", :sort => "model" %></th>
+                                            <th><%= link_to "carrier", :sort => "carrier" %></th>
+                                            <th><%= link_to "capacity", :sort => "capacity" %></th>
+                                            <th><%= link_to "condition", :sort => "condition" %></th>
+                                            <th><%= link_to "Price", :sort => "price" %></th>
                                             <th>Edit</th>
                                             <!-- <th>Deactivate</th> -->
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% @products.each do |product| %>
+                                        <% for product in @products %>
                                         <tr>     
                                             <td><%= product.id %></td>
                                             
@@ -198,11 +205,11 @@
                                             <td><%= product.capacity %></td>
                                             <td><%= product.condition %></td>
                                             <td><%= product.price %></td>
-                                            <td><button type="button" class="" data-toggle="modal" data-target="#edit">
+                                            <td><button type="button" class="btn btn-default fa fa-linkedin fa-fw network-name" data-toggle="modal" data-target="#edit<%= product.id%>">
                                               Edit
                                             </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal fade" id="edit<%= product.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <div class="modal-header">
@@ -210,26 +217,35 @@
                                                         <h4 class="modal-title" id="myModalLabel">Edit Phone</h4>
                                                       </div>
                                                       <div class="modal-body">
-                                                            <%= form_for @product do |form| %>
-                                                                Model
+                                                            <%= form_for @product, method: "patch" do |form| %>
+                                                                Model:
                                                                 <%= form.text_field :model, :required => true, :maxlength => 200, class: "form-control title_input_field", value: product.model %><br>
-                                                                Carrier
-                                                               
-                                                                <%= form.select_tag :carrier, ['AT&T','Verizon','T-Mobile','Sprint','Other Carrier'], selected: product.carrier %><br>
-                                                                Capacity
-                                                                <%= select(:capacity, :capacity, [['8', 8], ['16', 16], ["32", 32], ['64', 64], ["128", 128]], {}, {:class => 'dropdown_menu'}) %> <br>
-                                                                Condition
-                                                                <%= select(:condition, :condition, [['Busted', 'Busted'], ['Fair', 'Fair'], ["Pristine", 'Pristine']], {}, {:class => 'dropdown_menu'}) %>
+                                                                Carrier:
+                                                                <%= form.text_field :carrier, :required => true, :maxlength => 200, class: "form-control title_input_field", value: product.carrier %>
+                                                                Current Carriers: ATT, Verizon, T-Mobile, Sprint, Unlocked, Other Carrier
+                                                                
                                                                 <br>
-                                                                Price
+                                                                <br>
+                                                                Capacity:
+                                                                <%= form.text_field :capacity, :required => true, :maxlength => 200, class: "form-control title_input_field", value: product.capacity %>
+                                                                Current Capacities: 8GB, 16GB, 32GB, 64GB, 128GB<br>
+                                                                <br>
+
+                                                                Condition:
+                                                                <%= form.text_field :condition, :required => true, :maxlength => 200, class: "form-control title_input_field", value: product.condition %>
+                                                                Current Conditions: Busted, Fair, Pristine
+                                                                <br>
+                                                                <br>
+                                                                Price:
                                                                 <%= form.text_field :price, :required => true, placeholder: "Price", :maxlength => 200, class: "form-control title_input_field", value: product.price %><br>
                                                                 <br>
-                                                                <%= form.submit "Update", :class => 'submit_button' %>
-                                                            <% end %> 
+                                                                <%= form.hidden_field :id, value: product.id %><br>
+                                                                
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                        <%= form.submit "Update", :class => 'submit_button btn btn-default' %>
+                                                        <% end %> 
                                                       </div>
                                                     </div>
                                                   </div>

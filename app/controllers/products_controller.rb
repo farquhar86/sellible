@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
+  before_action :require_login, only: [:index] 
+
   def index
-    @products = Product.all
+
+    @products = Product.order(params[:sort])
     @product = Product.new
   end
 
@@ -11,12 +14,22 @@ class ProductsController < ApplicationController
     product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price)
 
     @product = Product.new product_params
-    byebug
+   
     @product.save
     redirect_to products_path , flash: { success: "New Product Added!" }
   end
   def edit
     @product = Product.find(params[:id])
+  end
+  def update
+    product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price, :id)
+    byebug
+    @product = Product.find(params[:product][:id])
+      if @product.update(product_params)
+         redirect_to "/products", flash: { success: "Your Change Has Been Saved" }
+      else
+        redirect_to "/products"   ### potentially change render page???? ###
+      end
   end
   def search
   	@products = Product.all
@@ -36,7 +49,7 @@ class ProductsController < ApplicationController
   end
   def destroy
     Product.delete(params[:id])
-    redirect_to "/product/index", flash: { success: "Phone Deleted" }
+    redirect_to "/products", flash: { success: "Phone Deleted" }
   end 	
 end
 

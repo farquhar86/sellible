@@ -26,6 +26,9 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# both are needed to paganate pages
+gem 'will_paginate', '~> 3.0.5'
+gem 'will_paginate-bootstrap'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

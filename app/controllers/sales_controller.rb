@@ -1,11 +1,19 @@
 class SalesController < ApplicationController
+  before_action :require_login, only: [:index] 
+
   def index
-    @sales = Sale.all
+    @sales = Sale.order(params[:sort]).paginate(:page => params[:page], :per_page => 8)
+    @products = Product.all
   end
   def new
-   	@sale = Sale.new
   	@phone = Product.where(condition: params["product.condition"], carrier: params["product.carrier"], model: params["product.model"], capacity: params["product.capacity"])
-  	price = @phone.first.price
+    redirect_to new_sale_id_path(@phone.first)
+  end
+
+  def newId
+    @sale = Sale.new
+    id = params[:id]
+    @phone = Product.find(id)
   end
 
   def create

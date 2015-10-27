@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   		login(@superuser)
   		redirect_to "/sales" 
   	else
-  		redirect_to root_path
+  		redirect_to "/login", flash: { success: "Please try your login info again" }
   	end
   end
 

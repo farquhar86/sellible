@@ -1,6 +1,7 @@
 <br>
 <br>
 <br>
+
 <div class="container">
     <div class="row">
 <%= bootstrap_flash %>
@@ -8,7 +9,7 @@
             <h1 class="page-header">Sales Dashboard!</h1>
         </div>
         <div class="col-sm-1">
-        	<%= link_to "Products", product_index_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
+        	<%= link_to "Products", products_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
         </div>	
         <div class="col-sm-1">
         	<%= button_to "Log Out", "/sign_out" %>
@@ -23,7 +24,7 @@
                     <div class="row"> 
                         <div class="col-xs-12 text-right">
                             <div id="numberReceivers" class="huge"></div>
-                            <div>All Orders Created <%= @sales.length %></div>
+                            <div>All Orders </div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                         
                         <div class="table-responsive">
                           
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"><h2><%= @sales.length %></h2></i></span>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
                     <div class="row">
                        
                         <div class="col-xs-12 text-right">
-                            <div>States we have shipped</div>
+                            <div>Need to Pay</div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +53,10 @@
                     <div class="panel-footer">
                         <div class="table-responsive">
                             
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i>
+                                <%= Sale.all.length %>
+
+                            </span>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -113,7 +117,7 @@
             <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i>Orders Places</i>
+                    <i>Orders</i>
                     <div class="pull-right">
                         <div class="dropdown">
                             <div class="btn-group">
@@ -143,42 +147,63 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Order#</th>
-                                            <th>Email</th>
-                                            <th>Order Date</th>
-                                            <th>Price</th>
-                                            <th>Name</th>
-                                            <th>Street</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>Country</th>
-                                            <th>Zip</th>
-                                            <th>Shipped</th>
-                                            <th>Arrived</th>
-                                            <th>Paid</th>
+                                            <th> <%= link_to "Order#",:sort => "id" %></th>
+                                            
+                                            <th><%= link_to "Email", :sort => "email" %></th>
+                                            <th><%= link_to "Order Date", :sort => "updated_at" %></th>
+                                            
+                                            
+                                            <th><%= link_to "Shipped", :sort => "phone_shipped" %></th>
+                                            <th><%= link_to "Arrived", :sort => "phone_arrived" %></th>
+                                            <th><%= link_to "Paid", :sort => "sale_paid" %> </th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% @sales.each do |sale| %>
-                                        <tr>     
-                                            
-                                           
-                                            <td><%= sale.id %></td>
-                                            <td><%= sale.email %></td>
+                                        <tr> 
+                                            <td><button type="button" class="btn btn-default fa fa-linkedin fa-fw network-name" data-toggle="modal" data-target="#myModal<%= sale.id %>">
+                                            <%= sale.id %>
+                                            </button> </td>
+                                            <td><%= sale.email %> </td>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal<%= sale.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Details</h4>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                   <strong>Name:</strong><br><br>  <%= sale.first_name.capitalize %> <%= sale.last_name.capitalize %><br><br>
+                                                   Address:<br><br>  <%= sale.address %><br>
+                                                   <%= sale.city %><br>
+                                                   <%= sale.state %><br>
+                                                   <%= sale.country %><br>
+                                                   <%= sale.zipcode %><br><br>
+                                                   
+                                                   Price:<br><br>
+                                                   <% @products.each do |product| %>
+                                                       <% if sale.product_id == product.id %>
+                                                            <% product.price %>
+                                                       <%end%>
+                                                   <%end%>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
                                             <td><%= sale.created_at%></td>
-                                            <td><%= sale.product_id %></td>
-                                            <td><%= sale.first_name %> <%= sale.last_name %></td>
-                                            <td><%= sale.address %></td>
-                                            <td><%= sale.city %></td>
-                                            <td><%= sale.state %></td>
-                                            <td><%= sale.country %></td>
-                                            <td><%= sale.zipcode %></td>
+                                           
+                                        
                                             <td> 
                                                 <% if sale.phone_shipped %>
                                                     <%= sale.phone_shipped %>
                                                 <% else %>    
-                                                    <%= button_to "Shipped", update_sale_path(sale, :shipped => true), :method => "post", class: "shipped"%>
+                                                    <%= button_to "Shipped", update_sale_path(sale, :shipped => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
                                                 <%end%>
                                                                                     
                                              </td>
@@ -186,7 +211,7 @@
                                                  <% if sale.phone_arrived %>
                                                     <%= sale.phone_arrived %>
                                                  <% else %>   
-                                                    <%= button_to "Arrived", update_sale_path(sale, :arrived => true), :method => "post", class: "shipped"%>
+                                                    <%= button_to "Arrived", update_sale_path(sale, :arrived => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
                                                  <%end%>
                                                                               
 
@@ -194,7 +219,7 @@
                                                 <% if sale.sale_paid %>
                                                    <%= sale.sale_paid %>
                                                 <% else %>  
-                                                    <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "shipped"%></td>
+                                                    <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%></td>
                                                 <%end%>
                                              <td> <%= link_to "Delete", delete_sale_path(sale), method: :delete %><br></td>
                                             
@@ -202,26 +227,27 @@
                                         <%end%>
                                     </tbody>
                                 </table>
-                            </div>
-                            <!-- /.table-responsive -->
+                            <%= will_paginate @sales, renderer: BootstrapPagination::Rails %>
                         </div>
-                        <!-- /.col-lg-4 (nested) -->
-                        <div class="col-lg-12">
-                            <div id="morris-bar-chart"></div>
-                        </div>
-                        <!-- /.col-lg-8 (nested) -->
+                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.col-lg-4 (nested) -->
+                    <div class="col-lg-12">
+                        <div id="morris-bar-chart"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.panel-body -->
+                <!-- /.row -->
             </div>
-            <!-- /.panel -->
-                <!-- /.panel-footer -->
-            </div>
-            <!-- /.panel .chat-panel -->
+            <!-- /.panel-body -->
         </div>
-        <!-- /.col-lg-4 -->
-     
+        <!-- /.panel -->
+            <!-- /.panel-footer -->
+        </div>
+        <!-- /.panel .chat-panel -->
     </div>
-    <!-- /.row -->
+    <!-- /.col-lg-4 -->
+ 
+</div>
+<!-- /.row -->
 </div>

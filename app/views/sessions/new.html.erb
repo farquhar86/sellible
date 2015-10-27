@@ -1,14 +1,21 @@
 <br>
 <br>
 <br>
-<p>Sign In Admin</p>    
-<%= form_for @superuser, url: "/sessions", method: "post", :html => {:class => "loginForm"} do |f| %>
-    <div>
-        <%= f.text_field :email, placeholder: "Email", value: "bar@bar.com"%>
-    </div>
-    <div>
-        <%= f.password_field :password, placeholder: "Password", value: "barbar" %>
-    </div>
-    
-    <%= f.submit "Sign In"%>
-<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 center">
+		<%= bootstrap_flash %>
+			<h2>Admin Login</h2><br>    
+				<%= form_for @superuser, url: "/sessions", method: "post", :html => {:class => "loginForm"} do |f| %>
+				    <div>
+				        <%= f.text_field :email, placeholder: "Email", value: "bar@bar.com"%>
+				    </div>
+				    <div>
+				        <%= f.password_field :password, placeholder: "Password", value: "barbar" %>
+				    </div><br>
+			    
+			    <%= f.submit "Sign In", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name" %>
+			<% end %>
+		</div>	
+	</div>
+</div>
