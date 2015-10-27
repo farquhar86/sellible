@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
 
-    @products = Product.order(params[:sort])
+    @products = Product.order(params[:sort]).paginate(:page => params[:page], :per_page => 50)
     @product = Product.new
   end
 
