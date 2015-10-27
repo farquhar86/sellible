@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
 
-    @products = Product.order(params[:sort]).paginate(:page => params[:page], :per_page => 50)
+    @products = Product.order(params[:sort]).paginate(:page => params[:page], :per_page => 100)
     @product = Product.new
   end
 
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   end
   def update
     product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price, :id)
-    byebug
+
     @product = Product.find(params[:product][:id])
       if @product.update(product_params)
          redirect_to "/products", flash: { success: "Your Change Has Been Saved" }

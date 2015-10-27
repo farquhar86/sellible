@@ -2,7 +2,7 @@ class SalesController < ApplicationController
   before_action :require_login, only: [:index] 
 
   def index
-    @sales = Sale.order(params[:sort]).paginate(:page => params[:page], :per_page => 8)
+    @sales = Sale.order(params[:sort]).paginate(:page => params[:page], :per_page => 30)
     @products = Product.all
   end
   def new
@@ -23,6 +23,7 @@ class SalesController < ApplicationController
   end
   def show
    	@sale = Sale.find(params[:id])
+
   end 
   def update
     sale = Sale.find(params[:id])
