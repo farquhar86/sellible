@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
 
     @products = Product.order(params[:sort]).paginate(:page => params[:page], :per_page => 100)
     @product = Product.new
+    @carriers = @products.select(:carrier).distinct 
+    @capacities = @products.select(:capacity).distinct
+    @conditions = @products.select(:condition).distinct
   end
 
   def new
@@ -12,9 +15,7 @@ class ProductsController < ApplicationController
 
   def create
     product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price)
-
     @product = Product.new product_params
-   
     @product.save
     redirect_to products_path , flash: { success: "New Product Added!" }
   end

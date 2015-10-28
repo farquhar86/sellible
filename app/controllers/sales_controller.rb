@@ -28,6 +28,7 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:sale][:id])
     @sale.update(sale_params)
     redirect_to @sale
+    
   end
   def show
    	@sale = Sale.find(params[:id])
@@ -55,6 +56,6 @@ class SalesController < ApplicationController
       params.require(:sale).permit(:email)
   end
    def sale_params  
-      params.require(:sale).permit(:first_name, :last_name, :address, :city, :state, :country, :zipcode, :phone, :product_id, :id)
+      params.require(:sale).permit(:first_name, :last_name, :address, :city, :state, :country, :zipcode, :phone, :product_id, :id, :mail_check, :complete_sale)
   end
 end

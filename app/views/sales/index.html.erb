@@ -1,19 +1,46 @@
-<br>
-<br>
-<br>
 
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                
+            </button>
+            <%= link_to "Sellible", root_path, class: "navbar-brand topnav", :method => :get%>
+            
+        </div>
+        <% if logged_in? %>
+            
+            <% else %>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <%= button_to "Products", products_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
+                </li>
+                <li>
+                    <%= button_to "Log Out", "/sign_out", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name" %>
+                </li>
+                
+            </ul>
+        </div>
+         <% end %>  
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<br>
+<br>
 <div class="container">
     <div class="row">
 <%= bootstrap_flash %>
         <div class="col-sm-11">
             <h1 class="page-header">Sales Dashboard!</h1>
         </div>
-        <div class="col-sm-1">
-        	<%= link_to "Products", products_path, class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", :method => :get%>
-        </div>	
-        <div class="col-sm-1">
-        	<%= button_to "Log Out", "/sign_out" %>
-        </div>	
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
@@ -146,13 +173,10 @@
                                 <table class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            
-                                            <th> <%= link_to "Order#",:sort => "id" %></th>
-                                            
+                                            <th><%= link_to "ID", :sort => "id" %></th>
+                                            <th><%= link_to "Complete Sale", :sort => "complete_sale" %></th>
                                             <th><%= link_to "Email", :sort => "email" %></th>
                                             <th><%= link_to "Order Date", :sort => "updated_at" %></th>
-                                            
-                                            
                                             <th><%= link_to "Shipped", :sort => "phone_shipped" %></th>
                                             <th><%= link_to "Arrived", :sort => "phone_arrived" %></th>
                                             <th><%= link_to "Paid", :sort => "sale_paid" %> </th>
@@ -165,6 +189,11 @@
                                             <td><button type="button" class="btn btn-default fa fa-linkedin fa-fw network-name" data-toggle="modal" data-target="#myModal<%= sale.id %>">
                                             <%= sale.id %>
                                             </button> </td>
+                                            <td> <% if sale.complete_sale != nil %>
+                                                        True
+                                                    <% else %>
+                                                        False
+                                                    <%end%> </td>
                                             <td><%= sale.email %> </td>
                                             <!-- Modal -->
                                             <div class="modal fade" id="myModal<%= sale.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -175,6 +204,7 @@
                                                     <h4 class="modal-title" id="myModalLabel">Details</h4>
                                                   </div>
                                                   <div class="modal-body">
+                                                <%if sale.first_name != nil %>
                                                    <strong>Name:</strong><br><br>  <%= sale.first_name.capitalize %> <%= sale.last_name.capitalize %><br><br>
                                                    Address:<br><br>  <%= sale.address %><br>
                                                    <%= sale.city %><br>
@@ -188,6 +218,9 @@
                                                             <% product.price %>
                                                        <%end%>
                                                    <%end%>
+                                                   Mailing Check:<br><br>
+                                                   <%= sale.mail_check %>
+                                                   <% end %>
                                                   </div>
                                                   <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -200,6 +233,7 @@
                                            
                                         
                                             <td> 
+                                                <% if sale.complete_sale != nil %>
                                                 <% if sale.phone_shipped %>
                                                     <%= sale.phone_shipped %>
                                                 <% else %>    
@@ -221,8 +255,11 @@
                                                 <% else %>  
                                                     <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%></td>
                                                 <%end%>
+                                            <% else %>
+                                                <td></td>
+                                                <td></td>
+                                            <%end%>    
                                              <td> <%= link_to "Delete", delete_sale_path(sale), method: :delete %><br></td>
-                                            
                                         </tr>
                                         <%end%>
                                     </tbody>

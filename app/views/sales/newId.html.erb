@@ -1,3 +1,6 @@
+<%= render 'layouts/header'%>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -29,29 +32,16 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        <%= form_for :sale, remote: true, url: sale_create_path, html: {id: "testing"} do |f| %>
-         
+        <%= form_for :sale, remote: true, url: sale_create_path, html: {id: "testing"} do |f| %>        
             <%= f.email_field :email, class: "form-control", placeholder: 'Email', autofocus: true, required: true %><br>
-
-          <%= f.button "Next", class: "collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name", id: "book-btn", type: "submit", role: "button", href: "#collapseTwo", :aria => {:controls=>"collapseTwo", :expanded=>"false"} %>  
-
+          <br><%= f.button "Next", class: "collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name", id: "book-btn", type: "submit", role: "button", href: "#collapseTwo", :aria => {:controls=>"collapseTwo", :expanded=>"false"} %>  
           <script type="text/javascript">
             $("form#testing").on("ajax:success", function(){
               $(this).parent().parent().collapse()
               $("#collapseTwo").collapse() // fugggggggly
             })
           </script>
-
-          <!-- <button class="collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button> -->
-
           <% end %>
-
-          <!-- :data => {:toggle=>"collapse", :parent=>"#accordion"}, href: "#collapseTwo", :aria => {:controls=>"collapseTwo", :expanded=>"false"} -->
-        
-       <!--  <button class="collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button> -->
-          
-     
-
       </div>
     </div>
   </div>
@@ -70,9 +60,8 @@
 
        <%= f.email_field :paypal_email, class: "form-control", placeholder: 'PayPal Email', autofocus: true, required: true %><br>
 
-       <%=f.check_box :terms_of_service %> Check the box if you would like us to mail you a check<br>
+       <%=f.check_box :mail_check, {}, true, false %> Check the box if you would like us to mail you a check<br>
        <button class="collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Next</button> 
-      
       </div>
     </div>
   </div>
@@ -86,49 +75,48 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-            
-
-            <div class="col-sm-12">
+        <div class="col-sm-12">
           <div class="col-sm-12 payments">
             <div class="row">
                 <%= f.text_field :first_name, class: "form-control", placeholder: 'First Name', autofocus: true, required: true %>
             </div>
-          <div class="row">
-            
-                <%= f.text_field :last_name, class: "form-control", placeholder: 'Last Name', autofocus: true, required: true %>
-          </div>
-         
-          <div class="row">
-            
-              <%= f.telephone_field :phone, type:"number", class: "form-control", placeholder: 'Phone', autofocus: true %>
+            <div class="row">
+              
+                  <%= f.text_field :last_name, class: "form-control", placeholder: 'Last Name', autofocus: true, required: true %>
+            </div>
            
-          </div>
-          <div class="row">
-            
-              <%= f.text_field :address, class: "form-control", placeholder: 'Address', autofocus: true %>
+            <div class="row">
+              
+                <%= f.telephone_field :phone, type:"number", class: "form-control", placeholder: 'Phone', autofocus: true %>
+             
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-5">
-              <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true %>
+            <div class="row">
+              
+                <%= f.text_field :address, class: "form-control", placeholder: 'Address', autofocus: true %>
+              </div>
             </div>
-            <div class="col-sm-7">
-              <%= f.text_field :state, class: "form-control", placeholder: 'State', autofocus: true %>
+            <div class="row">
+              <div class="col-sm-5">
+                <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true %>
+              </div>
+              <div class="col-sm-7">
+                <%= f.text_field :state, class: "form-control", placeholder: 'State', autofocus: true %>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-5">
-              <%= f.text_field :zipcode, type:"number", class: "form-control", placeholder: 'Zip Code', autofocus: true %>
+            <div class="row">
+              <div class="col-sm-5">
+                <%= f.text_field :zipcode, type:"number", class: "form-control", placeholder: 'Zip Code', autofocus: true %>
+              </div>
+              <div class="col-sm-7">
+                <%= f.text_field :country, class: "form-control", placeholder: 'Country', autofocus: true %>
+              </div>
             </div>
-            <div class="col-sm-7">
-              <%= f.text_field :country, class: "form-control", placeholder: 'Country', autofocus: true %>
-            </div>
-          </div>
 
           <%= f.hidden_field :product_id, :value => @phone.id %><br>
           <%= f.hidden_field :id, :value => @sale_id %>
+          <%= f.hidden_field :complete_sale, :value => true %>
           <!-- Button trigger modal -->
-        <%=f.check_box :terms_of_service, required: true  %> <a type="button" class="" data-toggle="modal" data-target="#myModal">Agree with Terms of Service</a><br> 
+          <%=f.check_box :terms_of_service, required: true  %> <a type="button" class="" data-toggle="modal" data-target="#myModal">Agree with Terms of Service</a><br> 
 
         <br><%= f.submit "Sell my Phone", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", id: "book-btn", type: "submit"%>  
         <% end %>
