@@ -36,6 +36,9 @@ class SalesController < ApplicationController
   end
   def show
    	@sale = Sale.find(params[:id])
+    id = Sale.last[:product_id]
+    @price = Product.find(id).price
+
 
   end 
   def update

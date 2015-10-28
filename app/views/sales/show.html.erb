@@ -7,9 +7,9 @@
 <br>
 <div class="container center">
 	<h1>Thank you</h1>
-	Order Number: <%= @sale.id %><br>
-	Locked in price: 
-	<br><br><p> You will recieve a email from us shortly with a shipping label</p>
+	Order Number: <%= @sale.id %><br><br>
+	Your offer of <%= number_to_currency(@price) %> is locked in for 30 days.
+	<br><br><p> You will recieve a email from us shortly with a shipping label.</p>
 	<!-- https://developers.facebook.com/docs/plugins/share-button/  this is the link to the share button -->
 </div>	
 
