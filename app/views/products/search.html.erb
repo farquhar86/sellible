@@ -41,13 +41,38 @@
 			<br>
 			<br>
 				Select condition: 
-			<div class="option">
+			<div class="option condition">
 				<select name="product.condition" class="form-control dropdown">
 				  <% @conditions.each do |condition| %>
-					  <option value="<%= condition.condition %>"><%= condition.condition %></option>
+					  <option value="<%= condition.condition %>" id="conditions"><%= condition.condition %></option>
 				  <% end %>
 			  	</select>
+
+			  	<script>
+			  	
+			  	$( ".condition select" ).change(function() {
+  					var condition = $(".condition select").val();
+  					console.log(condition);
+  					$(".info").empty()
+  					if (condition == "fair") {
+
+  						$(".info").append("<ul><li> Phone Functions Normally   </li><li>May Have Slight Scratches or Blemishes  </li><li>No Major Damage to Screen or Body </li></ul>"); 
+  					}
+  					else if (condition == "busted") {
+  						$(".info").append("<ul><li> Screen or Body is Cracked </li><li> Small Parts Issues (Cameras or Buttons) </li><li>Doesn't Power On. </li></ul>");
+  					}
+  					else if (condition == "pristine") {
+  						$(".info").append("<ul><li> No Signs of Use</li><li>Functions Perfectly</li><li>Appears Like New</li></ul>");
+  					}	
+  					else {
+  						$(".info").append("");
+  					}	
+  				});
+
+			  	</script> 	
 			</div>
+			<br>
+			<div class="info"></div>
 			<br>
 			<br>
 		<%= f.submit "Get My Price", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name"%>

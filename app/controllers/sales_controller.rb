@@ -7,7 +7,12 @@ class SalesController < ApplicationController
   end
   def new
   	@phone = Product.where(condition: params["product.condition"], carrier: params["product.carrier"], model: params["product.model"], capacity: params["product.capacity"])
-    redirect_to new_sale_id_path(@phone.first)
+    byebug
+    if @phone.first.id == nil
+      redirect_to '/product/search', flash: { success: "Sorry we do not buy that phone" }
+    else
+      redirect_to new_sale_id_path(@phone.first)
+    end  
   end
 
   def newId
