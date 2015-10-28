@@ -58,7 +58,7 @@
         Please enter your paypal email if different than above<br>
       <%= form_for @sale, method: "patch" do |f| %>
 
-       <%= f.email_field :paypal_email, class: "form-control", placeholder: 'PayPal Email', autofocus: true, required: true %><br>
+       <%= f.email_field :paypal_email, class: "form-control", placeholder: 'PayPal Email', autofocus: true%><br>
 
        <%=f.check_box :mail_check, {}, true, false %> Check the box if you would like us to mail you a check<br>
        <button class="collapsed btn btn-default btn-lg fa fa-linkedin fa-fw network-name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Next</button> 
