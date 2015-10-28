@@ -38,7 +38,7 @@ gem 'will_paginate-bootstrap'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry-byebug' #use with `binding.pry`
 end
 
 group :development do

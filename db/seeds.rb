@@ -1,3 +1,6 @@
+Sale.create(email: "test@test.com")
+Superuser.create(email: "bar@bar.com", password: "barbar")
+
 Product.create(model: 'iPhone 6', carrier: "ATT", capacity: 16, condition: "busted", price: 200)
 Product.create(model: 'iPhone 6', carrier: "ATT", capacity: 16, condition: "fair", price: 250)
 Product.create(model: 'iPhone 6', carrier: "ATT", capacity: 16, condition: "pristine", price: 300)

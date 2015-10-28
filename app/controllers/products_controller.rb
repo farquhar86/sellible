@@ -24,7 +24,6 @@ class ProductsController < ApplicationController
   end
   def update
     product_params = params.require(:product).permit(:model, :carrier, :capacity, :condition, :price, :id)
-
     @product = Product.find(params[:product][:id])
       if @product.update(product_params)
          redirect_to "/products", flash: { success: "Your Change Has Been Saved" }
@@ -44,7 +43,6 @@ class ProductsController < ApplicationController
   def find
   	@sale = Sale.new
   	@phone = Product.where(condition: params["product.condition"], carrier: params["product.carrier"], model: params["product.model"], capacity: params["product.capacity"])
- 	  byebug
   	price = @phone.first.price
   	redirect_to "/sale/new"
   end
