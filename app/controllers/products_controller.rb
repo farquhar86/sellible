@@ -36,7 +36,8 @@ class ProductsController < ApplicationController
   	@models = @products.select(:model).distinct 
   	@carriers = @products.select(:carrier).distinct 
   	@capacities = @products.select(:capacity).distinct
-  	@conditions = @products.select(:condition).distinct
+  	conditions = @products.select(:condition).distinct
+    @conditions = conditions.sort_by {|a| a.condition}.reverse
   	
 
   end

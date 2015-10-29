@@ -33,12 +33,15 @@ class SalesController < ApplicationController
     @sale.update(sale_params)
     redirect_to @sale
     
+
+    
   end
   def show
    	@sale = Sale.find(params[:id])
     id = Sale.last[:product_id]
     @price = Product.find(id).price
-
+    SaleMailer.purchase_receipt(@sale, @price).deliver ## this is the email to the customer
+    UpdateMailer.update_notifier(@sale, @price).deliver ## this is the email to the client
 
   end 
   def update

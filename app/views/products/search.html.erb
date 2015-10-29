@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="col-sm-6">
 			<!-- <img src="http://static.thetechjournal.net/wp-content/uploads/images/1110/1318091364-iphone-4s-now-available-for-preorder-1.png"> -->
-			This is where they can select there phone model
+			Model
 			
 		<%= form_for :phone, url: sale_new_path, method: "POST" do |f| %>	
 				<div class="option">
@@ -20,7 +20,7 @@
 				</div>
 			<br>
 			<br>
-				Select provider:
+				Select Provider:
 				<div class="option">
 					<select name="product.carrier" class="form-control dropdown">
 					  <% @carriers.each do |carrier| %>
@@ -30,7 +30,7 @@
 				</div>
 			<br>
 			<br>
-				Select capacity:
+				Select Capacity:
 			<div class="option">	 
 				<select name="product.capacity" class="form-control dropdown">
 				  <% @capacities.each do |capacity| %>
@@ -40,7 +40,7 @@
 			</div>	
 			<br>
 			<br>
-				Select condition: 
+				Select Condition: 
 			<div class="option condition">
 				<select name="product.condition" class="form-control dropdown">
 				  <% @conditions.each do |condition| %>
@@ -77,5 +77,11 @@
 			<br>
 		<%= f.submit "Get My Price", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name"%>
 		<% end %>
+		<br>
+		<br>
+		<br>
 	</div>
+	<div class="col-sm-6">
+		This is where you can add some testimonials
+	</div>	
 </div>

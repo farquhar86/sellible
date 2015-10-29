@@ -17,7 +17,13 @@
     Apple <%= @phone.model %> <%= @phone.capacity %>GB<br>
     (<%= @phone.carrier %>)
   </div>
-  <img class="img-responsive photo" align="middle" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/IPhone_5.png" alt="">
+  <% if @phone.model == "iPhone 6" %>
+  <img class="img-responsive" align="middle" src="http://www.libertywireless.com/img/iphone.png" alt="">
+  <% elsif @phone.model == "iPhone 5" %>
+    <img class="img-responsive photo" weigth="" align="middle" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/IPhone_5.png" alt="">
+  <% else %>
+  <img class="img-responsive photo" align="middle" src="http://mockuphone.com/static/images/phones/iphone5c_blue_side1.png" alt="">
+  <% end %>
 </div> 
 <div class="col-sm-8"> 
 <h3>Save your price and get paid</h3>		
@@ -92,23 +98,23 @@
             </div>
             <div class="row">
               
-                <%= f.text_field :address, class: "form-control", placeholder: 'Address', autofocus: true %>
+                <%= f.text_field :address, class: "form-control", placeholder: 'Address', autofocus: true, required: true %>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true %>
+                <%= f.text_field :city, class: "form-control", placeholder: 'City', autofocus: true, required: true %>
               </div>
               <div class="col-sm-7">
-                <%= f.text_field :state, class: "form-control", placeholder: 'State', autofocus: true %>
+                <%= f.text_field :state, class: "form-control", placeholder: 'State', autofocus: true, required: true %>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <%= f.text_field :zipcode, type:"number", class: "form-control", placeholder: 'Zip Code', autofocus: true %>
+                <%= f.text_field :zipcode, type:"number", class: "form-control", placeholder: 'Zip Code', autofocus: true, required: true %>
               </div>
               <div class="col-sm-7">
-                <%= f.text_field :country, class: "form-control", placeholder: 'Country', autofocus: true %>
+                <%= f.text_field :country, class: "form-control", placeholder: 'Country', autofocus: true, required: true %>
               </div>
             </div>
 
@@ -116,7 +122,7 @@
           <%= f.hidden_field :id, :value => @sale_id %>
           <%= f.hidden_field :complete_sale, :value => true %>
           <!-- Button trigger modal -->
-          <%=f.check_box :terms_of_service, required: true  %> <a type="button" class="" data-toggle="modal" data-target="#myModal">Agree with Terms of Service</a><br> 
+          <%=f.check_box :terms_of_service, required: true  %> Agree with <a type="button" class="" data-toggle="modal" data-target="#myModal">Terms of Service</a><br> 
 
         <br><%= f.submit "Sell my Phone", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name", id: "book-btn", type: "submit"%>  
         <% end %>

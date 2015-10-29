@@ -12,10 +12,10 @@
 			<h2>Admin Login</h2><br>    
 				<%= form_for @superuser, url: "/sessions", method: "post", :html => {:class => "loginForm"} do |f| %>
 				    <div>
-				        <%= f.text_field :email, placeholder: "Email", value: "bar@bar.com"%>
+				        <%= f.text_field :email, placeholder: "Email" %>
 				    </div>
 				    <div>
-				        <%= f.password_field :password, placeholder: "Password", value: "barbar" %>
+				        <%= f.password_field :password, placeholder: "Password" %>
 				    </div><br>
 			    
 			    <%= f.submit "Sign In", class: "btn btn-default btn-lg fa fa-linkedin fa-fw network-name" %>
