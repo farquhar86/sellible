@@ -12,10 +12,6 @@
             <%= link_to "Sellible", root_path, class: "navbar-brand topnav", :method => :get%>
             
         </div>
-        <% if logged_in? %>
-            
-            <% else %>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -27,8 +23,7 @@
                 </li>
                 
             </ul>
-        </div>
-         <% end %>  
+        </div> 
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
@@ -37,7 +32,7 @@
 <br>
 <div class="container">
     <div class="row">
-<%= bootstrap_flash %>
+        <%= bootstrap_flash %>
         <div class="col-sm-11">
             <h1 class="page-header">Sales Dashboard!</h1>
         </div>
@@ -45,7 +40,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-sm-12"> <!-- if you add the other boxes be sure to change the col size from 12 beak to 6 -->
             <div class="panel panel-primary custom-panel">
                 <div class="panel-heading"> 
                     <div class="row"> 
@@ -55,22 +50,18 @@
                         </div>
                     </div>
                 </div>
-                    <div class="panel-footer">
-                        
+                    <div class="panel-footer"> 
                         <div class="table-responsive">
-                          
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"><h2><%= @sales.length %></h2></i></span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"><h2><%= @sales.count %></h2></i></span>
                             <div class="clearfix"></div>
                         </div>
                     </div>
             </div>
-        </div>
-     
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        </div>   
+ <!--        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
-                       
                         <div class="col-xs-12 text-right">
                             <div>Need to Pay</div>
                         </div>
@@ -81,19 +72,18 @@
                         <div class="table-responsive">
                             
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i>
-                                <%= Sale.all.length %>
-
+                                
                             </span>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </a>
             </div>
-        </div>
+        </div> -->
         
     </div>
 <!-- second row -->
-     <div class="row">
+<!--      <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="panel panel-primary custom-panel">
                 <div class="panel-heading"> 
@@ -137,7 +127,7 @@
             </div>
         </div>
         
-    </div>
+    </div> -->
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
@@ -163,7 +153,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -186,16 +175,21 @@
                                     <tbody>
                                         <% @sales.each do |sale| %>
                                         <tr> 
-                                            <td><button type="button" class="btn btn-default fa fa-linkedin fa-fw network-name" data-toggle="modal" data-target="#myModal<%= sale.id %>">
-                                            <%= sale.id %>
-                                            </button> </td>
-                                            <td> <% if sale.complete_sale != nil %>
+                                            <td><% if sale.complete_sale != nil %> <!-- this if statment is there to make the id number a button or not depending on if it is a sale or not -->
+                                                    <button type="button" class="btn btn-default fa fa-linkedin fa-fw network-name" data-toggle="modal" data-target="#myModal<%= sale.id %>">
+                                                    <%= sale.id %>
+                                                    </button> 
+                                                <% else %>
+                                                    <%= sale.id %>
+                                                <% end %> </td>
+                                            <td> <% if sale.complete_sale != nil %> <!-- this if statment is there to say if the order is a complete order or we only got the email -->
                                                         True
                                                     <% else %>
                                                         False
                                                     <%end%> </td>
                                             <td><%= sale.email %> </td>
                                             <!-- Modal -->
+                                            <!-- this modal holds all the extra information on the sale -->
                                             <div class="modal fade" id="myModal<%= sale.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                               <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -228,37 +222,34 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                            </div>
+                                            </div> <!-- end of modal -->
                                             <td><%= sale.created_at%></td>
                                            
                                         
                                             <td> 
                                                 <% if sale.complete_sale != nil %>
-                                                <% if sale.phone_shipped %>
-                                                    <%= sale.phone_shipped %>
-                                                <% else %>    
-                                                    <%= button_to "Shipped", update_sale_path(sale, :shipped => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
-                                                <%end%>
-                                                                                    
+                                                    <% if sale.phone_shipped %>
+                                                        <%= sale.phone_shipped %>
+                                                    <% else %>    
+                                                        <%= button_to "Shipped", update_sale_path(sale, :shipped => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
+                                                    <%end%>                              
                                              </td>
                                              <td>
-                                                 <% if sale.phone_arrived %>
-                                                    <%= sale.phone_arrived %>
-                                                 <% else %>   
-                                                    <%= button_to "Arrived", update_sale_path(sale, :arrived => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
-                                                 <%end%>
-                                                                              
-
+                                                     <% if sale.phone_arrived %>
+                                                        <%= sale.phone_arrived %>
+                                                     <% else %>   
+                                                        <%= button_to "Arrived", update_sale_path(sale, :arrived => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%>
+                                                     <%end%>                                               
                                              <td> 
-                                                <% if sale.sale_paid %>
-                                                   <%= sale.sale_paid %>
-                                                <% else %>  
-                                                    <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%></td>
-                                                <%end%>
-                                            <% else %>
+                                                    <% if sale.sale_paid %>
+                                                       <%= sale.sale_paid %>
+                                                    <% else %>  
+                                                        <%= button_to "Paid", update_sale_path(sale, :paid => true), :method => "post", class: "btn btn-default fa fa-linkedin fa-fw network-name"%></td>
+                                                    <%end%>
+                                                <% else %>
                                                 <td></td>
                                                 <td></td>
-                                            <%end%>    
+                                                <%end%>    
                                              <td> <%= link_to "Delete", delete_sale_path(sale), method: :delete %><br></td>
                                         </tr>
                                         <%end%>

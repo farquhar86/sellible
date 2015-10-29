@@ -3,12 +3,12 @@
 <br>
 <br>
 <br>
-<br>
-<br>
+
 <div class="container">
-	<div class="col-sm-6">
+<%= bootstrap_flash %>
+	<div class="col-sm-5 drop-down-boxes">
 			<!-- <img src="http://static.thetechjournal.net/wp-content/uploads/images/1110/1318091364-iphone-4s-now-available-for-preorder-1.png"> -->
-			Model
+			Select Model:
 			
 		<%= form_for :phone, url: sale_new_path, method: "POST" do |f| %>	
 				<div class="option">
@@ -81,7 +81,25 @@
 		<br>
 		<br>
 	</div>
-	<div class="col-sm-6">
-		This is where you can add some testimonials
+	<div class="col-sm-6 col-sm-offset-1">
+		<div class="row">
+			<div class="col-sm-3">
+				<img src="http://ellisbenus.com/wp-content/uploads/2010/10/quote.png">
+			</div>
+			<div class="col-sm-9 quote-title">
+				<h3>What People Are Saying</h3>
+			</div>
+		</div>	
+			<div class="quote">	
+
+				<p>I heard of this website from my daughter. I tried it and was so pleased. How many people have old devices they could sell, many I'm sure. This was a very refreshing change in how people today do business. Great job you guys. Thank you</p>
+				<p>Bradley Farquhar</p>
+				<br>
+				<p>A first rate experience! A pre-addressed padded envelope came with my return address already on it, plus bubble wrap was included to protect the item being shipped. I was paid the same day the item was received.</p>
+				<p>Steve Flynn</p>
+				<br>
+				<p>I would totally recommend them to my friends, it was fast and easy. Plus I received more then I thought I was going to get. Thank You Missy</p>
+				<p>Cynthia Bridges</p>
+			</div>	
 	</div>	
 </div>

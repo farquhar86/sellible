@@ -24,6 +24,15 @@ h6 {
 .topnav {
     font-size: 14px; 
 }
+.quote {
+    padding-left: 10%;
+}
+.drop-down-boxes {
+    padding-top: 60px;
+}
+.quote-title {
+    padding-top: 8%;
+}
 
 .lead {
     font-size: 18px;
