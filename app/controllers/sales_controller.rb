@@ -7,7 +7,7 @@ class SalesController < ApplicationController
   end
   def new
   	@phone = Product.where(condition: params["product.condition"], carrier: params["product.carrier"], model: params["product.model"], capacity: params["product.capacity"])
-    if @phone.first.id == nil
+    if @phone == []
       redirect_to '/product/search', flash: { success: "Sorry we do not buy that phone" }
     else
       redirect_to new_sale_id_path(@phone.first)
@@ -33,9 +33,15 @@ class SalesController < ApplicationController
     @sale.update(sale_params)
     redirect_to @sale
     
+
+    
   end
   def show
    	@sale = Sale.find(params[:id])
+    id = Sale.last[:product_id]
+    @price = Product.find(id).price
+    SaleMailer.purchase_receipt(@sale, @price).deliver ## this is the email to the customer
+    UpdateMailer.update_notifier(@sale, @price).deliver ## this is the email to the client
 
   end 
   def update

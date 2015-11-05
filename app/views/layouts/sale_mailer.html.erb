@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Orders email</title>
+</head>
+<body>
+	<div class="row">
+		<img src="http://i.imgur.com/kkFIgsL.png" class="responsive center">
+	</div>
+	<div class="container">
+		<div class="row">	
+			<p>Hello <%= @sale.first_name.capitalize %>,</p>
+			
+			<p>Thanks for your order. We will be sending you and email with a shipping lable shortly. Once you recieve it please mail us your phone within 30 days to keep your locked in price of <%= number_to_currency(@price) %>.</p>
+			
+			<p> If you have any questions please feel free to respond to this email or give us a call</p>
+			<br>
+			<p>From Your Friends at Sellible</p>
+			<p>1 800 791-0458</p>
+		</div>
+	</div>	
+</body>
+</html>

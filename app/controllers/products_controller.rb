@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :require_login, only: [:index] 
 
   def index
-
     @products = Product.order(params[:sort]).paginate(:page => params[:page], :per_page => 100)
     @product = Product.new
     @carriers = @products.select(:carrier).distinct 
@@ -36,9 +35,8 @@ class ProductsController < ApplicationController
   	@models = @products.select(:model).distinct 
   	@carriers = @products.select(:carrier).distinct 
   	@capacities = @products.select(:capacity).distinct
-  	@conditions = @products.select(:condition).distinct
-  	
-
+  	conditions = @products.select(:condition).distinct
+    @conditions = conditions.sort_by {|a| a.condition}.reverse
   end
   def find
   	@sale = Sale.new
