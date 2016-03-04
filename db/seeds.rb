@@ -7,8 +7,8 @@ Superuser.create(email: "Daniel@sellible.com", password: "Daphil88")
 
 
 Product.create(model: 'iPhone 6 Plus', carrier: "ATT", capacity: 16, condition: "busted", price: 101 )
-Product.create(model: 'iPhone 6 Plus', carrier: "ATT", capacity: 16, condition: "fair", price: 101)
-Product.create(model: 'iPhone 6 Plus', carrier: "ATT", capacity: 16, condition: "pristine", price: 101)
+Product.create(model: 'iPhone 6 Plus', carrier: "ATT", capacity: 16, condition: "fair", price: 102)
+Product.create(model: 'iPhone 6 Plus', carrier: "ATT", capacity: 16, condition: "pristine", price: 103)
 Product.create(model: 'iPhone 6 Plus', carrier: "Verizon", capacity: 16, condition: "busted", price: 160) 
 Product.create(model: 'iPhone 6 Plus', carrier: "Verizon", capacity: 16, condition: "fair", price: 290)
 Product.create(model: 'iPhone 6 Plus', carrier: "Verizon", capacity: 16, condition: "pristine", price: 325)
